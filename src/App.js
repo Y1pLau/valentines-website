@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Box, Button, Typography } from '@mui/material'; // Import Material UI components
+import { Box, Button } from '@mui/material'; // Import Material UI components
 import HomePage from './components/HomePage';
 import PhotoGallery from './components/PhotoGallery';
 import TimelinePage from './components/TimelinePage';
@@ -19,6 +19,7 @@ const theme = createTheme({
 function App() {
   const hearts = new Array(50).fill(0); 
   const [audioPlayed, setAudioPlayed] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const playAudio = () => {
     const audio = new Audio("/test.mp3"); // Ensure the path is correct (audio file in public folder)
@@ -40,24 +41,53 @@ function App() {
   const sectionNames = ['HomePage', 'PhotoGallery', 'TimelinePage', 'LoveLetter'];
 
   const sectionRefs = [homeRef, galleryRef, timelineRef, letterRef];
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Function to scroll to the specific section
+  // Function to scroll to the specific section with delay
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.length) {
-      console.log("Scrolling to:", sectionNames[index]); // Log the section name instead of the reference
-      // Check if sectionRef exists before scrolling
       const section = sectionRefs[index].current;
+      console.log("Scrolling to:", sectionNames[index]); // Log the section name
       if (section) {
         section.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         });
-        // Delay the state update to ensure it works correctly
-        setTimeout(() => setCurrentIndex(index), 1000);
+        // Delay the state update to ensure the scroll happens smoothly
+        setTimeout(() => setCurrentIndex(index), 500);
       }
     }
   };
+
+  // Use IntersectionObserver to track visibility of sections
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = sectionRefs.findIndex(ref => ref.current === entry.target);
+            if (index !== -1) {
+              console.log('Currently in view:', sectionNames[index]);
+              setTimeout(() => setCurrentIndex(index), 500); // Set the current section index
+            }
+          }
+        });
+      },
+      { threshold: 0.5 } // 50% of the section in view triggers observer
+    );
+
+    // Observe each section
+    sectionRefs.forEach(ref => {
+      if (ref.current) {
+        console.log('Observing:', ref.current);
+        observer.observe(ref.current);
+      }
+    });
+
+    // Cleanup observer when component unmounts
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
