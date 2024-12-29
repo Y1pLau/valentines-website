@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.fixed-buttons {
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom */
+  right: 20px;  /* Position the buttons on the right side */
+  z-index: 1000; /* Ensure the buttons are on top of other content */
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px;  /* Space between the buttons */
+}
