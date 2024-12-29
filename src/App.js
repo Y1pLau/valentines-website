@@ -1,64 +1,70 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Box, Button } from '@mui/material'; // Import Material UI components
+import { Box, Button, Typography } from '@mui/material';
 import HomePage from './components/HomePage';
 import PhotoGallery from './components/PhotoGallery';
 import TimelinePage from './components/TimelinePage';
 import LoveLetter from './components/LoveLetter';
 import './App.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';  // Import FontAwesome
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 
 const theme = createTheme({
   palette: {
     primary: { main: '#d32f2f' },
-    background: { default: '#ffe6e6' },
+    background: { default: 'white' },
   },
 });
 
 function App() {
-  const hearts = new Array(50).fill(0); 
+  const hearts = new Array(50).fill(0);
   const [audioPlayed, setAudioPlayed] = useState(false);
+  const [audio, setAudio] = useState(null);  // Track the audio instance
+  const [isPlaying, setIsPlaying] = useState(false);  // Toggle play/pause
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const playAudio = () => {
-    const audio = new Audio("/test.mp3"); // Ensure the path is correct (audio file in public folder)
-    audio.loop = true; // Loop the audio if desired
-    audio.play().then(() => {
-      setAudioPlayed(true);
-    }).catch((error) => {
-      console.error("Error playing audio:", error);
-    });
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
-
-  // Refs for each section
+    // Set the audio instance on mount
+    useEffect(() => {
+      const newAudio = new Audio("/test.mp3");
+      newAudio.loop = true;
+      setAudio(newAudio);
+  
+      return () => {
+        newAudio.pause();  // Clean up on unmount
+      };
+    }, []);
   const homeRef = useRef(null);
   const galleryRef = useRef(null);
   const timelineRef = useRef(null);
   const letterRef = useRef(null);
 
-  // Names for each section to display in the console log
-  const sectionNames = ['HomePage', 'PhotoGallery', 'TimelinePage', 'LoveLetter'];
-
   const sectionRefs = [homeRef, galleryRef, timelineRef, letterRef];
 
-  // Function to scroll to the specific section with delay
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.length) {
       const section = sectionRefs[index].current;
-      console.log("Scrolling to:", sectionNames[index]); // Log the section name
       if (section) {
         section.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         });
-        // Delay the state update to ensure the scroll happens smoothly
         setTimeout(() => setCurrentIndex(index), 500);
       }
     }
   };
 
-  // Use IntersectionObserver to track visibility of sections
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -66,24 +72,20 @@ function App() {
           if (entry.isIntersecting) {
             const index = sectionRefs.findIndex(ref => ref.current === entry.target);
             if (index !== -1) {
-              console.log('Currently in view:', sectionNames[index]);
-              setTimeout(() => setCurrentIndex(index), 500); // Set the current section index
+              setTimeout(() => setCurrentIndex(index), 500);
             }
           }
         });
       },
-      { threshold: 0.5 } // 50% of the section in view triggers observer
+      { threshold: 0.5 }
     );
 
-    // Observe each section
     sectionRefs.forEach(ref => {
       if (ref.current) {
-        console.log('Observing:', ref.current);
         observer.observe(ref.current);
       }
     });
 
-    // Cleanup observer when component unmounts
     return () => {
       observer.disconnect();
     };
@@ -92,56 +94,141 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {!audioPlayed && (
-        <button onClick={playAudio}>Start Music</button>
-      )}
-
+    
+      {/* Music Control Button */}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={playAudio}
+        sx={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '20px',
+          width: '60px',
+          height: '60px',
+          borderRadius: '50%',
+          fontSize: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'}`} style={{ fontSize: '30px' }}></i>
+      </Button>
       <div className="falling-hearts">
         {hearts.map((_, index) => (
           <div key={index} className="heart">
-            <i className="fas fa-heart"></i> {/* FontAwesome heart icon */}
+            <i className="fas fa-heart"></i>
           </div>
         ))}
       </div>
 
-      {/* Scrollspy Navigation */}
       <div className="fixed-buttons">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => scrollToSection(currentIndex - 1)}
-          disabled={currentIndex === 0}
-        >
-          Up
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => scrollToSection(currentIndex + 1)}
-          disabled={currentIndex === sectionRefs.length - 1}
-        >
-          Down
-        </Button>
+      <Button
+  variant="contained"
+  color="primary"
+  onClick={() => scrollToSection(currentIndex - 1)}
+  disabled={currentIndex === 0}
+  sx={{
+    width: '80px',
+    height: '80px',
+    borderRadius: '50%', // Makes the button circular
+    fontSize: '24px', // Increases font size for better visibility
+    padding: 0, // Removes extra padding to maintain circular shape
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+>
+  <i className="fas fa-arrow-up" style={{ fontSize: '30px' }}></i>
+</Button>
+
+<Button
+  variant="contained"
+  color="primary"
+  onClick={() => scrollToSection(currentIndex + 1)}
+  disabled={currentIndex === sectionRefs.length - 1}
+  sx={{
+    width: '80px',
+    height: '80px',
+    borderRadius: '50%', // Makes the button circular
+    fontSize: '24px', // Increases font size for better visibility
+    padding: 0, // Removes extra padding to maintain circular shape
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+>
+  <i className="fas fa-arrow-down" style={{ fontSize: '30px' }}></i>
+</Button>
+
+
       </div>
 
-      {/* Sections */}
-      <Box sx={{ minHeight: '100vh', paddingBottom: 20 }} ref={homeRef}>
+      {/* Sections with Containers */}
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#ffeef3',
+          textAlign: 'center',
+          color: 'white', // White text
+        }}
+        ref={homeRef}
+      >
+        <Typography variant="h4" component="h2" gutterBottom>
+        </Typography>
         <HomePage />
       </Box>
 
-      <Box sx={{ minHeight: '100vh', paddingBottom: 20 }} ref={galleryRef}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#f8bbd0',
+          textAlign: 'center',
+          color: 'white', // White text
+        }}
+        ref={galleryRef}
+      >
+        <Typography variant="h4" component="h2" gutterBottom>
+          Photo Gallery
+        </Typography>
         <PhotoGallery />
       </Box>
 
-      <Box sx={{ minHeight: '100vh', paddingBottom: 20 }} ref={timelineRef}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#f48fb1',
+          textAlign: 'center',
+          color: 'white', // White text
+        }}
+        ref={timelineRef}
+      >
+        <Typography variant="h4" component="h2" gutterBottom>
+          Timeline Page
+        </Typography>
         <TimelinePage />
       </Box>
 
-      <Box sx={{ minHeight: '100vh', paddingBottom: 20 }} ref={letterRef}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#f06292',
+          textAlign: 'center',
+          color: 'white', // White text
+        }}
+        ref={letterRef}
+      >
+        <Typography variant="h4" component="h2" gutterBottom>
+          Love Letter
+        </Typography>
         <LoveLetter />
       </Box>
     </ThemeProvider>
   );
 }
-
 export default App;

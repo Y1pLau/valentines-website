@@ -15,7 +15,6 @@ function HomePage() {
         flexDirection: 'column',
         justifyContent: 'center', // Center content vertically
         alignItems: 'center', // Center content horizontally
-        backgroundColor: '#ffe6e6',
         textAlign: 'center',
         padding: 3,
       }}
