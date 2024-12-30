@@ -17,6 +17,7 @@ function PhotoGallery() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: true, // Adds navigation arrows
   };
 
   return (
@@ -33,7 +34,7 @@ function PhotoGallery() {
               alt={photo.caption}
               sx={{
                 maxWidth: '100%',
-                maxHeight: '400px', // Restrict maximum height
+                maxHeight: '600px', // Increased max height for larger images
                 width: 'auto', // Maintain aspect ratio
                 height: 'auto', // Maintain aspect ratio
                 borderRadius: '16px',
@@ -41,7 +42,7 @@ function PhotoGallery() {
                 margin: '0 auto', // Center the image horizontally
               }}
             />
-            <Typography variant="body1" sx={{ mt: 2 }}>
+            <Typography variant="body1" sx={{ mt: 2, fontSize: '1.2rem' }}>
               {photo.caption}
             </Typography>
           </div>
