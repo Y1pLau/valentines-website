@@ -35,16 +35,18 @@ function App() {
       setIsPlaying(!isPlaying);
     }
   };
-    // Set the audio instance on mount
-    useEffect(() => {
-      const newAudio = new Audio("/test.mp3");
-      newAudio.loop = true;
-      setAudio(newAudio);
-  
-      return () => {
-        newAudio.pause();  // Clean up on unmount
-      };
-    }, []);
+
+  // Set the audio instance on mount
+  useEffect(() => {
+    const newAudio = new Audio("/test.mp3");
+    newAudio.loop = true;
+    setAudio(newAudio);
+
+    return () => {
+      newAudio.pause();  // Clean up on unmount
+    };
+  }, []);
+
   const homeRef = useRef(null);
   const galleryRef = useRef(null);
   const timelineRef = useRef(null);
@@ -111,10 +113,12 @@ function App() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          zIndex: 100,
         }}
       >
         <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'}`} style={{ fontSize: '30px' }}></i>
       </Button>
+
       <div className="falling-hearts">
         {hearts.map((_, index) => (
           <div key={index} className="heart">
@@ -124,45 +128,45 @@ function App() {
       </div>
 
       <div className="fixed-buttons">
-      <Button
-  variant="contained"
-  color="primary"
-  onClick={() => scrollToSection(currentIndex - 1)}
-  disabled={currentIndex === 0}
-  sx={{
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%', // Makes the button circular
-    fontSize: '24px', // Increases font size for better visibility
-    padding: 0, // Removes extra padding to maintain circular shape
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
->
-  <i className="fas fa-arrow-up" style={{ fontSize: '30px' }}></i>
-</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => scrollToSection(currentIndex - 1)}
+          disabled={currentIndex === 0}
+          sx={{
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%', // Circular button
+            fontSize: '24px',
+            padding: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
+          }}
+        >
+          <i className="fas fa-arrow-up" style={{ fontSize: '30px' }}></i>
+        </Button>
 
-<Button
-  variant="contained"
-  color="primary"
-  onClick={() => scrollToSection(currentIndex + 1)}
-  disabled={currentIndex === sectionRefs.length - 1}
-  sx={{
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%', // Makes the button circular
-    fontSize: '24px', // Increases font size for better visibility
-    padding: 0, // Removes extra padding to maintain circular shape
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
->
-  <i className="fas fa-arrow-down" style={{ fontSize: '30px' }}></i>
-</Button>
-
-
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => scrollToSection(currentIndex + 1)}
+          disabled={currentIndex === sectionRefs.length - 1}
+          sx={{
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%', // Circular button
+            fontSize: '24px',
+            padding: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
+          }}
+        >
+          <i className="fas fa-arrow-down" style={{ fontSize: '30px' }}></i>
+        </Button>
       </div>
 
       {/* Sections with Containers */}
@@ -172,12 +176,10 @@ function App() {
           padding: '20px',
           backgroundColor: '#ffeef3',
           textAlign: 'center',
-          color: 'white', // White text
+          color: 'white',
         }}
         ref={homeRef}
       >
-        <Typography variant="h4" component="h2" gutterBottom>
-        </Typography>
         <HomePage />
       </Box>
 
@@ -187,11 +189,11 @@ function App() {
           padding: '20px',
           backgroundColor: '#f8bbd0',
           textAlign: 'center',
-          color: 'white', // White text
+          color: 'white',
         }}
         ref={galleryRef}
       >
-        <Typography variant="h4" component="h2" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           Photo Gallery
         </Typography>
         <PhotoGallery />
@@ -200,14 +202,13 @@ function App() {
       <Box
         sx={{
           minHeight: '100vh',
-          padding: '20px',
           backgroundColor: '#f48fb1',
           textAlign: 'center',
-          color: 'white', // White text
+          color: 'white',
         }}
         ref={timelineRef}
       >
-        <Typography variant="h4" component="h2" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           Timeline Page
         </Typography>
         <TimelinePage />
@@ -219,11 +220,11 @@ function App() {
           padding: '20px',
           backgroundColor: '#f06292',
           textAlign: 'center',
-          color: 'white', // White text
+          color: 'white',
         }}
         ref={letterRef}
       >
-        <Typography variant="h4" component="h2" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           Love Letter
         </Typography>
         <LoveLetter />
@@ -231,4 +232,5 @@ function App() {
     </ThemeProvider>
   );
 }
+
 export default App;
