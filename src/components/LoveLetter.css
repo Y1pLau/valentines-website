@@ -3,6 +3,7 @@
   height: 450px;
   perspective: 1500px;
   margin: auto;
+  /* Center the card */
 }
 
 .flip-card-inner {
@@ -40,4 +41,21 @@
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto; /* Ensure long content is scrollable */
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+  .flip-card {
+    width: 90%; /* Adjust card width for smaller screens */
+    height: auto; /* Allow height to adjust dynamically */
+  }
+
+  .flip-card-inner {
+    transition: transform 0.5s ease-in-out; /* Slightly faster transition for smaller screens */
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    border-radius: 10px; /* Slightly reduce border radius on mobile */
+  }
 }
