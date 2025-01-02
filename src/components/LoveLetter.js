@@ -65,7 +65,7 @@ function LoveLetter() {
             boxShadow: '0px 8px 12px rgba(0, 0, 0, 0.2)',
             padding: '20px',
             border: '2px solid #f48fb1',
-            backgroundImage: `url('/postcard.jpg')`, // Use a sakura background pattern
+            backgroundImage: `url('postcard.jpg')`, // Use a sakura background pattern
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}

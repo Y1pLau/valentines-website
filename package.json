@@ -7,17 +7,24 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@mapbox/react-map-gl": "^4.2.0-dev",
     "@mui/icons-material": "^6.3.0",
     "@mui/lab": "^6.0.0-beta.21",
     "@mui/material": "^6.3.0",
+    "@react-google-maps/api": "^2.20.5",
     "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
     "framer-motion": "^11.15.0",
     "googleapis": "^144.0.0",
+    "leaflet": "^1.9.4",
+    "mapbox-gl": "^3.9.1",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.7",
     "react-countdown": "^2.3.6",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "react-leaflet": "^5.0.0",
+    "react-map-gl": "^7.1.8",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.3",
@@ -55,4 +62,3 @@
     "gh-pages": "^6.2.0"
   }
 }
-

@@ -6,10 +6,9 @@ import HomePage from './components/HomePage';
 import PhotoGallery from './components/PhotoGallery';
 import TimelinePage from './components/TimelinePage';
 import LoveLetter from './components/LoveLetter';
+import InteractiveMap from './components/InteractiveMap';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
 
 const theme = createTheme({
   palette: {
@@ -21,8 +20,8 @@ const theme = createTheme({
 function App() {
   const hearts = new Array(50).fill(0);
   const [audioPlayed, setAudioPlayed] = useState(false);
-  const [audio, setAudio] = useState(null);  // Track the audio instance
-  const [isPlaying, setIsPlaying] = useState(false);  // Toggle play/pause
+  const [audio, setAudio] = useState(null); // Track the audio instance
+  const [isPlaying, setIsPlaying] = useState(false); // Toggle play/pause
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const playAudio = () => {
@@ -36,14 +35,13 @@ function App() {
     }
   };
 
-  // Set the audio instance on mount
   useEffect(() => {
-    const newAudio = new Audio("/test.mp3");
+    const newAudio = new Audio('test.mp3');
     newAudio.loop = true;
     setAudio(newAudio);
 
     return () => {
-      newAudio.pause();  // Clean up on unmount
+      newAudio.pause(); // Clean up on unmount
     };
   }, []);
 
@@ -51,8 +49,9 @@ function App() {
   const galleryRef = useRef(null);
   const timelineRef = useRef(null);
   const letterRef = useRef(null);
+  const mapRef = useRef(null);
 
-  const sectionRefs = [homeRef, galleryRef, timelineRef, letterRef];
+  const sectionRefs = [homeRef, galleryRef, timelineRef, letterRef, mapRef];
 
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.length) {
@@ -67,12 +66,44 @@ function App() {
     }
   };
 
+  // Store and restore scroll position
+  useEffect(() => {
+    // Check if there's a saved scroll position
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+    } else {
+      // If there's no saved scroll position, set it to the top
+      window.scrollTo(0, 0);
+    }
+
+    // Save the scroll position on page unload (before the user leaves or refreshes the page)
+    const handleBeforeUnload = () => {
+      sessionStorage.setItem('scrollPosition', window.scrollY);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  // Prevent Timeline Page from auto-scrolling on refresh
+  useEffect(() => {
+    const firstLoad = sessionStorage.getItem('firstLoad');
+    if (!firstLoad) {
+      // Scroll to top on initial load
+      window.scrollTo(0, 0);
+      sessionStorage.setItem('firstLoad', 'true');
+    }
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = sectionRefs.findIndex(ref => ref.current === entry.target);
+            const index = sectionRefs.findIndex((ref) => ref.current === entry.target);
             if (index !== -1) {
               setTimeout(() => setCurrentIndex(index), 500);
             }
@@ -82,7 +113,7 @@ function App() {
       { threshold: 0.5 }
     );
 
-    sectionRefs.forEach(ref => {
+    sectionRefs.forEach((ref) => {
       if (ref.current) {
         observer.observe(ref.current);
       }
@@ -96,7 +127,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-    
+
       {/* Music Control Button */}
       <Button
         variant="contained"
@@ -136,7 +167,7 @@ function App() {
           sx={{
             width: '60px',
             height: '60px',
-            borderRadius: '50%', // Circular button
+            borderRadius: '50%',
             fontSize: '24px',
             padding: 0,
             display: 'flex',
@@ -156,7 +187,7 @@ function App() {
           sx={{
             width: '60px',
             height: '60px',
-            borderRadius: '50%', // Circular button
+            borderRadius: '50%',
             fontSize: '24px',
             padding: 0,
             display: 'flex',
@@ -228,6 +259,24 @@ function App() {
           Love Letter
         </Typography>
         <LoveLetter />
+      </Box>
+
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#f8bbd0',
+          textAlign: 'center',
+          color: 'white',
+        }}
+        ref={mapRef}
+      >
+        <Typography variant="h4" gutterBottom>
+          Travel Memories Map
+        </Typography>
+        <Box sx={{ height: '500px', width: '100%' }}>
+          <InteractiveMap />
+        </Box>
       </Box>
     </ThemeProvider>
   );
