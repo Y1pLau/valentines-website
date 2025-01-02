@@ -1,0 +1,67 @@
+/* Button styles for the map */
+.toggle-sidebar-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px 15px;
+    background-color: #f48fb1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Hover effect for the button */
+  .toggle-sidebar-button:hover {
+    background-color: #ec407a;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    color: #f48fb1; /* Default font color */
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .sidebar ul li.active {
+    background-color: #f48fb1;
+    color: white; /* Selected font color */
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #f8e1e9; /* Light pink background on hover */
+    color: #ec407a; /* Slightly darker pink font color on hover */
+  }
+  
+  /* Sidebar Title */
+  .sidebar h3 {
+    color: #f48fb1; /* Font color for the title */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    transition: color 0.3s;
+  }
+  
+  .sidebar h3:hover {
+    color: #ec407a; /* Slightly darker pink when hovered */
+  }
+  

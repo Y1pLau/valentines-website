@@ -1,11 +1,14 @@
 import React from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
-import Countdown from 'react-countdown';
 
 function HomePage() {
-  const countdownRenderer = ({ days, hours, minutes, seconds }) => (
-    <span>{days}d {hours}h {minutes}m {seconds}s</span>
-  );
+  // Set the date when you met your girlfriend
+  const metDate = new Date('2023-01-01'); // Replace with your actual date
+  const currentDate = new Date();
+  
+  // Calculate the difference in time and convert to days
+  const differenceInTime = currentDate - metDate;
+  const differenceInDays = Math.floor(differenceInTime / (1000 * 60 * 60 * 24));
 
   return (
     <Box
@@ -29,16 +32,16 @@ function HomePage() {
         }}
       >
         <Typography variant="h3" color="primary" gutterBottom>
-          Happy Valentine’s Day!
+          Happy Memories with You!
         </Typography>
         <Typography variant="body1" gutterBottom>
-          To the love of my life, this website is for you. 💖
+          Every moment with you feels like magic. 💖
         </Typography>
         <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
-          Countdown to Valentine’s Day:
+          Days Since We Met:
         </Typography>
         <Typography variant="h4" sx={{ color: '#d32f2f' }}>
-          <Countdown date={new Date('2024-02-14')} renderer={countdownRenderer} />
+          {differenceInDays} days
         </Typography>
         <Box sx={{ mt: 3 }}>
           <Button

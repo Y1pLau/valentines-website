@@ -66,7 +66,7 @@ const TimelinePage = () => {
       nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [currentStep]);
-
+  
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" gutterBottom align="center">2024 Dating Milestones</Typography>

@@ -5,8 +5,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Box, Typography } from '@mui/material';
 
 const photos = [
-  { src: 'IMG_4585.JPG', caption: 'Our first trip together' },
-  { src: 'IMG_5249.JPEG', caption: 'A beautiful sunset we watched' },
+  { src: 'Victoria1.jpg', caption: 'Our first trip together' },
+  { src: 'Victoria2.jpeg', caption: 'A beautiful sunset we watched' },
   { src: '/images/photo3.jpg', caption: 'Cherished moments 💖' },
 ];
 
@@ -17,7 +17,7 @@ function PhotoGallery() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true, // Adds navigation arrows
+    arrows: false, // Remove the navigation arrows
   };
 
   return (
