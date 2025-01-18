@@ -1,67 +1,99 @@
 /* Button styles for the map */
 .toggle-sidebar-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    padding: 10px 15px;
-    background-color: #f48fb1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Hover effect for the button */
-  .toggle-sidebar-button:hover {
-    background-color: #ec407a;
-  }
-  
-  /* Sidebar */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  padding: 10px 15px;
+  background-color: #f48fb1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for the button */
+.toggle-sidebar-button:hover {
+  background-color: #ec407a;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  overflow-y: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(-100%);
+  position: absolute;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  transform: translateY(0);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  color: #f48fb1;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar ul li.active {
+  background-color: #f48fb1;
+  color: white;
+}
+
+.sidebar ul li:hover {
+  background-color: #f8e1e9;
+  color: #ec407a;
+}
+
+/* Sidebar Title */
+.sidebar h3 {
+  color: #f48fb1;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.sidebar input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Map container styles */
+.map-container {
+  flex: 1;
+  position: relative;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
   .sidebar {
-    width: 250px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    overflow-y: auto;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 50%;
+    top: 0;
+    left: 0;
   }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
+
+  .toggle-sidebar-button {
+    top: 10px;
+    right: 10px;
+    left: auto;
   }
-  
-  .sidebar ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-    color: #f48fb1; /* Default font color */
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .sidebar ul li.active {
-    background-color: #f48fb1;
-    color: white; /* Selected font color */
-  }
-  
-  .sidebar ul li:hover {
-    background-color: #f8e1e9; /* Light pink background on hover */
-    color: #ec407a; /* Slightly darker pink font color on hover */
-  }
-  
-  /* Sidebar Title */
-  .sidebar h3 {
-    color: #f48fb1; /* Font color for the title */
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-    transition: color 0.3s;
-  }
-  
-  .sidebar h3:hover {
-    color: #ec407a; /* Slightly darker pink when hovered */
-  }
-  
+}

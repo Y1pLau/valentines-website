@@ -7,6 +7,8 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mapbox/react-map-gl": "^4.2.0-dev",
     "@mui/icons-material": "^6.3.0",
     "@mui/lab": "^6.0.0-beta.21",
