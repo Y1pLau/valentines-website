@@ -3,7 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box, Button, Typography } from '@mui/material';
 import HomePage from './components/HomePage';
-import PhotoGallery from './components/PhotoGallery';
+import PhotoAlbum from './components/PhotoGallery';
 import TimelinePage from './components/TimelinePage';
 import LoveLetter from './components/LoveLetter';
 import InteractiveMap from './components/InteractiveMap';
@@ -227,7 +227,7 @@ function App() {
         <Typography variant="h4" gutterBottom>
           Photo Gallery
         </Typography>
-        <PhotoGallery />
+        <PhotoAlbum />
       </Box>
 
       <Box

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
+import CountUp from 'react-countup'; // Import react-countup
 
 function HomePage() {
   // Set the date when you met your girlfriend
   const metDate = new Date('2023-01-01'); // Replace with your actual date
   const currentDate = new Date();
-  
+
   // Calculate the difference in time and convert to days
   const differenceInTime = currentDate - metDate;
   const differenceInDays = Math.floor(differenceInTime / (1000 * 60 * 60 * 24));
@@ -41,7 +42,8 @@ function HomePage() {
           Days Since We Met:
         </Typography>
         <Typography variant="h4" sx={{ color: '#d32f2f' }}>
-          {differenceInDays} days
+          {/* Animated number using react-countup */}
+          <CountUp start={0} end={differenceInDays} duration={2} />
         </Typography>
         <Box sx={{ mt: 3 }}>
           <Button

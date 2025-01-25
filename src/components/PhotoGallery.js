@@ -1,55 +1,92 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 
-const photos = [
-  { src: 'Victoria1.jpg', caption: 'Our first trip together' },
-  { src: 'Victoria2.jpeg', caption: 'A beautiful sunset we watched' },
-  { src: '/images/photo3.jpg', caption: 'Cherished moments 💖' },
+const albumData = [
+    { src: "/album/0e22ebf7-52e6-4ac8-8da9-38f1da303de3.jpg", caption: "Photo: 0e22ebf7-52e6-4ac8-8da9-38f1da303de3.jpg" },
+    { src: "/album/7b761b60-9173-40a3-b371-35bca53a3e53.JPG", caption: "Photo: 7b761b60-9173-40a3-b371-35bca53a3e53.JPG" },
+    { src: "/album/befd1f9c-2cc3-4b02-a4a0-ead77b5f7dba.jpg", caption: "Photo: befd1f9c-2cc3-4b02-a4a0-ead77b5f7dba.jpg" },
+    { src: "/album/IMG_2582.JPG", caption: "Photo: IMG_2582.JPG" },
+    { src: "/album/IMG_3028.JPG", caption: "Photo: IMG_3028.JPG" },
+    { src: "/album/IMG_3474.DNG", caption: "Photo: IMG_3474.DNG" },
+    { src: "/album/IMG_4584.JPG", caption: "Photo: IMG_4584.JPG" },
+    { src: "/album/IMG_4584.MP4", caption: "Photo: IMG_4584.MP4" },
+    { src: "/album/IMG_5203.JPG", caption: "Photo: IMG_5203.JPG" },
+    { src: "/album/IMG_5203.MP4", caption: "Photo: IMG_5203.MP4" },
+    { src: "/album/IMG_5249.JPG", caption: "Photo: IMG_5249.JPG" },
+    { src: "/album/IMG_5249.MP4", caption: "Photo: IMG_5249.MP4" },
+    { src: "/album/IMG_5250.JPG", caption: "Photo: IMG_5250.JPG" },
+    { src: "/album/IMG_5250.MP4", caption: "Photo: IMG_5250.MP4" },
+    { src: "/album/IMG_5312.JPG", caption: "Photo: IMG_5312.JPG" },
+    { src: "/album/IMG_5594.JPG", caption: "Photo: IMG_5594.JPG" },
+    { src: "/album/IMG_5872.JPG", caption: "Photo: IMG_5872.JPG" },
+    { src: "/album/IMG_5872.MP4", caption: "Photo: IMG_5872.MP4" },
+    { src: "/album/IMG_6255.JPG", caption: "Photo: IMG_6255.JPG" },
+    { src: "/album/IMG_6255.MP4", caption: "Photo: IMG_6255.MP4" },
+    { src: "/album/IMG_6277.JPG", caption: "Photo: IMG_6277.JPG" },
+    { src: "/album/IMG_6291.JPG", caption: "Photo: IMG_6291.JPG" },
+    { src: "/album/IMG_6441.JPG", caption: "Photo: IMG_6441.JPG" },
+    { src: "/album/IMG_7066.JPG", caption: "Photo: IMG_7066.JPG" },
+    { src: "/album/IMG_7153.JPG", caption: "Photo: IMG_7153.JPG" },
+    { src: "/album/IMG_7221.JPG", caption: "Photo: IMG_7221.JPG" },
+    { src: "/album/IMG_7605.JPG", caption: "Photo: IMG_7605.JPG" },
+    { src: "/album/IMG_7605.MP4", caption: "Photo: IMG_7605.MP4" },
+    { src: "/album/IMG_7659.JPG", caption: "Photo: IMG_7659.JPG" },
+    { src: "/album/IMG_7659.MP4", caption: "Photo: IMG_7659.MP4" },
+    { src: "/album/IMG_7682.JPG", caption: "Photo: IMG_7682.JPG" },
+    { src: "/album/IMG_7682.MP4", caption: "Photo: IMG_7682.MP4" },
+    { src: "/album/IMG_7832.JPG", caption: "Photo: IMG_7832.JPG" },
+    { src: "/album/IMG_7832.MP4", caption: "Photo: IMG_7832.MP4" },
+    { src: "/album/IMG_7859.JPG", caption: "Photo: IMG_7859.JPG" },
+    { src: "/album/IMG_7859.MP4", caption: "Photo: IMG_7859.MP4" },
+    { src: "/album/IMG_7873.JPG", caption: "Photo: IMG_7873.JPG" },
+    { src: "/album/IMG_7873.MP4", caption: "Photo: IMG_7873.MP4" },
+    { src: "/album/IMG_7957.JPG", caption: "Photo: IMG_7957.JPG" },
+    { src: "/album/IMG_7957.MP4", caption: "Photo: IMG_7957.MP4" },
+    { src: "/album/IMG_8070.JPG", caption: "Photo: IMG_8070.JPG" },
+    { src: "/album/IMG_8160.JPG", caption: "Photo: IMG_8160.JPG" },
+    { src: "/album/IMG_8263.JPG", caption: "Photo: IMG_8263.JPG" },
+    { src: "/album/IMG_8314.JPG", caption: "Photo: IMG_8314.JPG" },
+    { src: "/album/IMG_8643.JPG", caption: "Photo: IMG_8643.JPG" },
+    { src: "/album/IMG_8695.JPG", caption: "Photo: IMG_8695.JPG" },
+    { src: "/album/IMG_8700.JPG", caption: "Photo: IMG_8700.JPG" },
+    { src: "/album/IMG_8773.JPG", caption: "Photo: IMG_8773.JPG" },
+    { src: "/album/IMG_8776.JPG", caption: "Photo: IMG_8776.JPG" },
+    { src: "/album/IMG_8778.JPG", caption: "Photo: IMG_8778.JPG" }
 ];
 
-function PhotoGallery() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false, // Remove the navigation arrows
-  };
-
-  return (
-    <Box sx={{ mt: 5, textAlign: 'center' }}>
-      <Typography variant="h4" gutterBottom>
-        Our Memories Together
-      </Typography>
-      <Slider {...settings}>
-        {photos.map((photo, index) => (
-          <div key={index}>
-            <Box
-              component="img"
-              src={photo.src}
-              alt={photo.caption}
-              sx={{
-                maxWidth: '100%',
-                maxHeight: '600px', // Increased max height for larger images
-                width: 'auto', // Maintain aspect ratio
-                height: 'auto', // Maintain aspect ratio
-                borderRadius: '16px',
-                display: 'block',
-                margin: '0 auto', // Center the image horizontally
-              }}
-            />
-            <Typography variant="body1" sx={{ mt: 2, fontSize: '1.2rem' }}>
-              {photo.caption}
+function PhotoAlbum() {
+    return (
+        <Box sx={{ mt: 5, textAlign: 'center' }}>
+            <Typography variant="h4" gutterBottom>
+                Our Memories Album
             </Typography>
-          </div>
-        ))}
-      </Slider>
-    </Box>
-  );
+            <Grid container spacing={4} sx={{ mt: 3 }}>
+                {albumData.map((photo, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Box
+                            component="img"
+                            src={photo.src} // Image source
+                            sx={{
+                                width: '100%',
+                                height: 'auto',
+                                borderRadius: '16px',
+                                boxShadow: 3,
+                            }}
+                        />
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                mt: 1,
+                                fontSize: '1rem',
+                            }}
+                        >
+                            {photo.caption} {/* Caption text */}
+                        </Typography>
+                    </Grid>
+                ))}
+            </Grid>
+        </Box>
+    );
 }
 
-export default PhotoGallery;
+export default PhotoAlbum;
