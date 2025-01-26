@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/valentines-website/static/css/main.4c7037a4.css",
-    "main.js": "/valentines-website/static/js/main.c7094197.js",
+    "main.js": "/valentines-website/static/js/main.fe4ef92d.js",
     "static/js/488.5dcf0cb3.chunk.js": "/valentines-website/static/js/488.5dcf0cb3.chunk.js",
     "static/media/fa-solid-900.ttf": "/valentines-website/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/valentines-website/static/media/fa-brands-400.1815e00441357e01619e.ttf",
@@ -13,11 +13,11 @@
     "static/media/fa-v4compatibility.woff2": "/valentines-website/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/valentines-website/index.html",
     "main.4c7037a4.css.map": "/valentines-website/static/css/main.4c7037a4.css.map",
-    "main.c7094197.js.map": "/valentines-website/static/js/main.c7094197.js.map",
+    "main.fe4ef92d.js.map": "/valentines-website/static/js/main.fe4ef92d.js.map",
     "488.5dcf0cb3.chunk.js.map": "/valentines-website/static/js/488.5dcf0cb3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4c7037a4.css",
-    "static/js/main.c7094197.js"
+    "static/js/main.fe4ef92d.js"
   ]
 }
