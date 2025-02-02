@@ -1,6 +1,7 @@
-import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
-
+import React, { useState } from 'react';
+import { Box, Typography, Grid, Button, Dialog, DialogContent, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { ImageList, ImageListItem } from '@mui/material';
 const albumData = [
     { src: "0e22ebf7-52e6-4ac8-8da9-38f1da303de3.jpg", caption: "Photo: 0e22ebf7-52e6-4ac8-8da9-38f1da303de3.jpg" },
     { src: "7b761b60-9173-40a3-b371-35bca53a3e53.JPG", caption: "Photo: 7b761b60-9173-40a3-b371-35bca53a3e53.JPG" },
@@ -54,40 +55,175 @@ const albumData = [
     { src: "IMG_8778.JPG", caption: "Photo: IMG_8778.JPG" }
 ];
 
-
 function PhotoAlbum() {
+    const [selectedMedia, setSelectedMedia] = useState(null);
+    const [openAlbum, setOpenAlbum] = useState(false);
+  
+    const handleOpenDialog = (media) => setSelectedMedia(media);
+    const handleCloseDialog = () => setSelectedMedia(null);
+  
+    const handleAlbumClick = () => {
+      setOpenAlbum(true);
+    };
+  
+    const handleCloseAlbumDialog = () => {
+      setOpenAlbum(false);
+    };
+  
+    const renderMedia = (src) => {
+      const isVideo = src.endsWith(".MP4") || src.endsWith(".mp4");
+      return isVideo ? (
+        <Box
+          component="video"
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onClick={() => handleOpenDialog(src)}
+          sx={{
+            cursor: "pointer",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "12px",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            "&:hover": {
+              transform: "scale(1.05)",
+              boxShadow: 3,
+            },
+          }}
+        />
+      ) : (
+        <Box
+          component="img"
+          src={src}
+          alt=""
+          onClick={() => handleOpenDialog(src)}
+          sx={{
+            cursor: "pointer",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "12px",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            "&:hover": {
+              transform: "scale(1.05)",
+              boxShadow: 3,
+            },
+          }}
+        />
+      );
+    };
+  
     return (
-        <Box sx={{ mt: 5, textAlign: 'center' }}>
-            <Typography variant="h4" gutterBottom>
-                Our Memories Album
-            </Typography>
-            <Grid container spacing={4} sx={{ mt: 3 }}>
-                {albumData.map((photo, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Box
-                            component="img"
-                            src={photo.src} // Image source
-                            sx={{
-                                width: '100%',
-                                height: 'auto',
-                                borderRadius: '16px',
-                                boxShadow: 3,
-                            }}
-                        />
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                mt: 1,
-                                fontSize: '1rem',
-                            }}
-                        >
-                            {photo.caption} {/* Caption text */}
-                        </Typography>
-                    </Grid>
-                ))}
+      <Box sx={{ mt: 5, px: 2 }}>
+        <Typography variant="h5" gutterBottom sx={{ textAlign: "center" }}>
+          Memories Album
+        </Typography>
+  
+        {/* Album Preview */}
+        <Button
+          variant="outlined"
+          onClick={handleAlbumClick}
+          sx={{ display: "block", mx: "auto", mt: 2 }}
+        >
+          Open Album
+        </Button>
+  
+        {/* Dialog for Full Album */}
+        <Dialog open={openAlbum} onClose={handleCloseAlbumDialog} maxWidth="lg" fullScreen>
+          <DialogContent
+            sx={{
+              position: "relative",
+              p: 0,
+              backgroundColor: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              overflow: "auto",
+            }}
+          >
+            <Grid container spacing={2} sx={{ mt: 2 }}>
+              {albumData.map((item, index) => (
+                <Grid item xs={6} sm={4} md={3} key={index}>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: 0,
+                      paddingBottom: "100%", // To maintain square aspect ratio
+                      position: "relative",
+                    }}
+                  >
+                    {renderMedia(item.src)}
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
-        </Box>
+            <IconButton
+              onClick={handleCloseAlbumDialog}
+              sx={{
+                position: "absolute",
+                top: 16,
+                right: 16,
+                color: "#fff",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
+                },
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+  
+        {/* Dialog for Full Image or Video */}
+        {selectedMedia && (
+          <Dialog open={Boolean(selectedMedia)} onClose={handleCloseDialog} maxWidth="lg" fullScreen>
+            <DialogContent
+              sx={{
+                position: "relative",
+                p: 0,
+                backgroundColor: "#000",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                component={selectedMedia.endsWith(".MP4") ? "video" : "img"}
+                src={selectedMedia}
+                autoPlay={selectedMedia.endsWith(".MP4")}
+                muted
+                loop
+                playsInline
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+              <IconButton
+                onClick={handleCloseDialog}
+                sx={{
+                  position: "absolute",
+                  top: 16,
+                  right: 16,
+                  color: "#fff",
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  "&:hover": {
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                  },
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </DialogContent>
+          </Dialog>
+        )}
+      </Box>
     );
-}
-
-export default PhotoAlbum;
+  }
+  
+  export default PhotoAlbum;
