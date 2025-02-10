@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
+import { ArrowForward } from '@mui/icons-material'; // Import arrow icon
 import CountUp from 'react-countup'; // Import react-countup
 
 function HomePage() {
   // Set the date when you met your girlfriend
-  const metDate = new Date('2023-01-01'); // Replace with your actual date
+  const metDate = new Date('2023-09-18'); // Replace with your actual date
   const currentDate = new Date();
 
   // Calculate the difference in time and convert to days
@@ -38,7 +39,7 @@ function HomePage() {
         <Typography variant="body1" gutterBottom>
           Every moment with you feels like magic. 💖
         </Typography>
-        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
+        <Typography variant="h5" color="primary" gutterBottom sx={{ mt: 3 }}>
           Days Since We Met:
         </Typography>
         <Typography variant="h4" sx={{ color: '#d32f2f' }}>
@@ -50,11 +51,12 @@ function HomePage() {
             variant="contained"
             color="primary"
             href="/gallery"
+            endIcon={<ArrowForward />} // Add arrow icon
             sx={{
               '&:hover': { backgroundColor: '#b71c1c' },
             }}
           >
-            View Our Memories
+            Move Next
           </Button>
         </Box>
       </Container>

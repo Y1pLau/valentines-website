@@ -7,16 +7,16 @@ const TimelinePage = () => {
   // Sample milestones for the 2024 dating timeline
   const milestones = [
     { 
-      date: '2024-01-01', 
+      date: '2023-09-18', 
       title: 'Our First Meeting', 
-      description: 'We met at the park for the first time, and it was magical.',
-      imageUrl: 'Victoria1.jpg',
+      description: '我同林林第一次坐摩天輪, 亦係第一次同女仔坐摩天輪',
+      imageUrl: 'https://y1plau.github.io/valentines-website/0e22ebf7-52e6-4ac8-8da9-38f1da303de3.jpg',
     },
     { 
       date: '2024-02-14', 
       title: 'Valentine\'s Day Dinner', 
-      description: 'A beautiful evening by the river, sharing a romantic dinner.',
-      imageUrl: 'Victoria2.jpeg',
+      description: '第一次同林林過情人節,亦係第一次同女仔過情人節',
+      imageUrl: 'https://y1plau.github.io/valentines-website/0e22ebf7-52e6-4ac8-8da9-38f1da303de3.jpg',
     },
     { 
       date: '2024-03-25', 

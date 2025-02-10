@@ -21,27 +21,27 @@ const createFontAwesomeMarker = (iconClass) => {
 const locations = [
   {
     id: 1,
-    name: 'Arashiyama',
-    coords: [35.0095, 135.6706],
-    description: 'A beautiful bamboo forest we visited together.',
-    time: '2024-12-01 10:00 AM',
-    image: 'Victoria1.jpg', // Replace with actual image URL
+    name: 'Tokyo',
+    coords: [35.6762, 139.6503],
+    description: 'The bustling capital city of Japan, full of culture and modernity.',
+    time: '2025-05-30',
+    image: 'https://y1plau.github.io/valentines-website/IMG_4584.JPG', // Replace with actual image URL
   },
   {
     id: 2,
-    name: 'Lake Biwa',
-    coords: [35.3331, 136.0565],
-    description: 'The serene lake where we made heart gestures.',
-    time: '2024-12-01 2:00 PM',
-    image: 'https://via.placeholder.com/150/LakeBiwa.jpg', // Replace with actual image URL
+    name: 'Kyoto',
+    coords: [35.0116, 135.7681],
+    description: 'The historical heart of Japan, where tradition and beauty meet.',
+    time: '2024-06-21',
+    image: 'https://y1plau.github.io/valentines-website/IMG_5250.JPG', // Replace with actual image URL
   },
   {
     id: 3,
-    name: 'Yasaka Shrine',
-    coords: [35.0037, 135.7787],
-    description: 'The shrine where we prayed for happiness.',
-    time: '2024-12-01 4:00 PM',
-    image: 'https://via.placeholder.com/150/YasakaShrine.jpg', // Replace with actual image URL
+    name: 'Sapporo',
+    coords: [43.0618, 141.3545],
+    description: 'The snowy city of Hokkaido, known for its skiing resorts and beautiful parks.',
+    time: '2025-01-09',
+    image: 'https://y1plau.github.io/valentines-website/IMG_8263.JPG', // Replace with actual image URL
   },
 ];
 
@@ -130,12 +130,17 @@ const InteractiveMap = () => {
             >
               <Popup>
                 <b>{location.name}</b>
-                <p>{location.description}</p>
                 <p><i>{location.time}</i></p>
                 <img
                   src={location.image}
                   alt={location.name}
-                  style={{ width: '100%', borderRadius: '8px', marginTop: '8px' }}
+                  style={{
+                    width: '200px',   // Fixed width
+                    height: 'auto',   // Height auto to maintain aspect ratio
+                    objectFit: 'contain', // Ensure the image is fully contained without distortion
+                    borderRadius: '8px',
+                    marginTop: '8px',
+                  }}
                 />
               </Popup>
             </Marker>
