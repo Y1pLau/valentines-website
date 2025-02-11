@@ -46,19 +46,7 @@ function HomePage() {
           {/* Animated number using react-countup */}
           <CountUp start={0} end={differenceInDays} duration={2} />
         </Typography>
-        <Box sx={{ mt: 3 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            href="/gallery"
-            endIcon={<ArrowForward />} // Add arrow icon
-            sx={{
-              '&:hover': { backgroundColor: '#b71c1c' },
-            }}
-          >
-            Move Next
-          </Button>
-        </Box>
+        
       </Container>
     </Box>
   );

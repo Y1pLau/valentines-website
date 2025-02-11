@@ -51,7 +51,7 @@ function App() {
   const letterRef = useRef(null);
   const mapRef = useRef(null);
 
-  const sectionRefs = [homeRef, galleryRef, timelineRef, letterRef, mapRef];
+  const sectionRefs = [homeRef, timelineRef, letterRef, mapRef, galleryRef];
 
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.length) {
@@ -205,7 +205,7 @@ function App() {
         sx={{
           minHeight: '100vh',
           padding: '20px',
-          backgroundColor: '#ffeef3',
+          backgroundColor: '#fee5eb',
           textAlign: 'center',
           color: 'white',
         }}
@@ -214,26 +214,11 @@ function App() {
         <HomePage />
       </Box>
 
-      <Box
-        sx={{
-          minHeight: '100vh',
-          padding: '20px',
-          backgroundColor: '#f8bbd0',
-          textAlign: 'center',
-          color: 'white',
-        }}
-        ref={galleryRef}
-      >
-        <Typography variant="h4" gutterBottom>
-          Photo Gallery
-        </Typography>
-        <PhotoAlbum />
-      </Box>
 
       <Box
         sx={{
           minHeight: '100vh',
-          backgroundColor: '#f48fb1',
+          backgroundColor: '#ffc2d2',
           textAlign: 'center',
           color: 'white',
         }}
@@ -249,7 +234,7 @@ function App() {
         sx={{
           minHeight: '100vh',
           padding: '20px',
-          backgroundColor: '#f06292',
+          backgroundColor: '#feb3c7',
           textAlign: 'center',
           color: 'white',
         }}
@@ -265,7 +250,7 @@ function App() {
         sx={{
           minHeight: '100vh',
           padding: '20px',
-          backgroundColor: '#f8bbd0',
+          backgroundColor: '#fd8faa',
           textAlign: 'center',
           color: 'white',
         }}
@@ -277,6 +262,22 @@ function App() {
         <Box sx={{ height: '500px', width: '100%' }}>
           <InteractiveMap />
         </Box>
+      </Box>
+      
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#fb6f92',
+          textAlign: 'center',
+          color: 'white',
+        }}
+        ref={galleryRef}
+      >
+        <Typography variant="h4" gutterBottom>
+          Photo Gallery
+        </Typography>
+        <PhotoAlbum />
       </Box>
     </ThemeProvider>
   );
