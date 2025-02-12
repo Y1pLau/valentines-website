@@ -9,7 +9,9 @@ import LoveLetter from './components/LoveLetter';
 import InteractiveMap from './components/InteractiveMap';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import MusicPlayer from './components/MusicPlayer';
+import { IconButton } from '@mui/material';
+import { MusicNote } from '@mui/icons-material';
 const theme = createTheme({
   palette: {
     primary: { main: '#d32f2f' },
@@ -19,11 +21,11 @@ const theme = createTheme({
 
 function App() {
   const hearts = new Array(50).fill(0);
-  const [audioPlayed, setAudioPlayed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Define the isOpen state here
   const [audio, setAudio] = useState(null); // Track the audio instance
   const [isPlaying, setIsPlaying] = useState(false); // Toggle play/pause
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
   const playAudio = () => {
     if (audio) {
       if (isPlaying) {
@@ -129,26 +131,7 @@ function App() {
       <CssBaseline />
 
       {/* Music Control Button */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={playAudio}
-        sx={{
-          position: 'fixed',
-          bottom: '20px',
-          left: '20px',
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          fontSize: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 100,
-        }}
-      >
-        <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'}`} style={{ fontSize: '30px' }}></i>
-      </Button>
+     
 
       <div className="falling-hearts">
         {hearts.map((_, index) => (
@@ -279,6 +262,14 @@ function App() {
         </Typography>
         <PhotoAlbum />
       </Box>
+      <div>
+      
+{/* Apple Style Music Player Button */}
+
+
+      {/* Music Player (Apple Style) */}
+      <MusicPlayer />
+    </div>
     </ThemeProvider>
   );
 }

@@ -26,7 +26,7 @@ function LoveLetter() {
   };
 
   const message = [
-    "Like the sakura petals that dance in the breeze, my love for you grows more beautiful with each passing day.",
+    "Meow Hello 林林,寫緊依個係情人節前兩日,好開心可以同林林過我地嘅第一個情人節,",
     "With every moment we spend together, I feel my heart blossom just like the cherry blossoms in spring.",
     "Happy Valentine’s Day! I can't wait for more memories to be made as we continue this beautiful journey together."
   ];
