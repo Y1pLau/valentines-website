@@ -1,9 +1,10 @@
 .flip-card {
-  width: 700px;
-  height: 450px;
+  width: 90%;
+  max-width: 1000px;
+  aspect-ratio: 3 / 2; /* Maintain postcard shape */
   perspective: 1500px;
   margin: auto;
-  /* Center the card */
+  height: auto; /* Allow it to adjust based on content */
 }
 
 .flip-card-inner {
@@ -23,15 +24,21 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  min-height: inherit; /* Ensure both sides have equal height */
   backface-visibility: hidden;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
+
 
 .flip-card-front {
   background-color: #fff;
-  border: 2px solid #f48fb1;
-  background-size: cover;
+  border: 10px solid white; /* Thick white border like a postcard */
   background-position: center;
+  background-size: cover;
 }
 
 .flip-card-back {
@@ -39,23 +46,27 @@
   border: 2px solid #f48fb1;
   transform: rotateY(180deg);
   padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto; /* Ensure long content is scrollable */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Mobile View Adjustments */
 @media (max-width: 768px) {
   .flip-card {
-    width: 90%; /* Adjust card width for smaller screens */
-    height: auto; /* Allow height to adjust dynamically */
-  }
-
-  .flip-card-inner {
-    transition: transform 0.5s ease-in-out; /* Slightly faster transition for smaller screens */
+    width: 80%;
   }
 
   .flip-card-front,
   .flip-card-back {
-    border-radius: 10px; /* Slightly reduce border radius on mobile */
+    font-size: 12px !important;
+  }
+
+  .flip-card-back {
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 100%;
   }
 }
