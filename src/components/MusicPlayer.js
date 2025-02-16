@@ -5,7 +5,7 @@ import { PlayArrow, Pause, SkipNext, SkipPrevious, VolumeUp, MusicNote } from '@
 const playlist = [
   { title: "Wherever You Are", artist: "ONE OK ROCK", src: "https://y1plau.github.io/valentines-website/OneOkRock-WhereverYouAre.mp3", cover: "download.jpg" },
   { title: "Sukidakara", artist: "Yuika", src: "https://y1plau.github.io/valentines-website/Yuika_Ren_-_Sukidakara_(Hydr0.org).mp3", cover: "414F8C+obOL._UXNaN_FMjpg_QL85_.jpg" },
-  { title: "Perfect", artist: "Ed Sheeran", src: "https://y1plau.github.io/valentines-website/OneOkRock-WhereverYouAre.mp3", cover: "/images/edsheeran.jpg" },
+  { title: "Now, I'm going from underground", artist: "kessoku band", src: "https://y1plau.github.io/valentines-website/Now, I'm going from underground.mp3", cover: "Shine-as-usual-Now-I-m-going-from-underground-Japanese-2024-20240523105605-500x500.jpg" },
 ];
 
 function MusicPlayer() {
