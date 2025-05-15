@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useRef, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,11 +8,11 @@ import PhotoAlbum from './components/PhotoGallery';
 import TimelinePage from './components/TimelinePage';
 import LoveLetter from './components/LoveLetter';
 import InteractiveMap from './components/InteractiveMap';
+import GiftExchange from './components/GiftExchange'; // Add this import
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import MusicPlayer from './components/MusicPlayer';
-import { IconButton } from '@mui/material';
-import { MusicNote } from '@mui/icons-material';
+
 const theme = createTheme({
   palette: {
     primary: { main: '#d32f2f' },
@@ -21,11 +22,12 @@ const theme = createTheme({
 
 function App() {
   const hearts = new Array(50).fill(0);
-  const [isOpen, setIsOpen] = useState(false); // Define the isOpen state here
-  const [audio, setAudio] = useState(null); // Track the audio instance
-  const [isPlaying, setIsPlaying] = useState(false); // Toggle play/pause
+  const [isOpen, setIsOpen] = useState(false);
+  const [audio, setAudio] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
+
   const playAudio = () => {
     if (audio) {
       if (isPlaying) {
@@ -43,7 +45,7 @@ function App() {
     setAudio(newAudio);
 
     return () => {
-      newAudio.pause(); // Clean up on unmount
+      newAudio.pause();
     };
   }, []);
 
@@ -52,8 +54,9 @@ function App() {
   const timelineRef = useRef(null);
   const letterRef = useRef(null);
   const mapRef = useRef(null);
+  const giftRef = useRef(null); // Add reference for gift section
 
-  const sectionRefs = [homeRef, timelineRef, letterRef, mapRef, galleryRef];
+  const sectionRefs = [homeRef, timelineRef, letterRef, mapRef, giftRef, galleryRef]; // Update array
 
   const scrollToSection = (index) => {
     if (index >= 0 && index < sectionRefs.length) {
@@ -68,70 +71,11 @@ function App() {
     }
   };
 
-  // Store and restore scroll position
-  useEffect(() => {
-    // Check if there's a saved scroll position
-    const scrollPosition = sessionStorage.getItem('scrollPosition');
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition, 10));
-    } else {
-      // If there's no saved scroll position, set it to the top
-      window.scrollTo(0, 0);
-    }
-
-    // Save the scroll position on page unload (before the user leaves or refreshes the page)
-    const handleBeforeUnload = () => {
-      sessionStorage.setItem('scrollPosition', window.scrollY);
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
-  // Prevent Timeline Page from auto-scrolling on refresh
-  useEffect(() => {
-    const firstLoad = sessionStorage.getItem('firstLoad');
-    if (!firstLoad) {
-      // Scroll to top on initial load
-      window.scrollTo(0, 0);
-      sessionStorage.setItem('firstLoad', 'true');
-    }
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = sectionRefs.findIndex((ref) => ref.current === entry.target);
-            if (index !== -1) {
-              setTimeout(() => setCurrentIndex(index), 500);
-            }
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    sectionRefs.forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  // ... (keep your existing useEffect hooks for scroll position and intersection observer)
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
-      {/* Music Control Button */}
-     
 
       <div className="falling-hearts">
         {hearts.map((_, index) => (
@@ -197,7 +141,6 @@ function App() {
         <HomePage />
       </Box>
 
-
       <Box
         sx={{
           minHeight: '100vh',
@@ -246,7 +189,21 @@ function App() {
           <InteractiveMap />
         </Box>
       </Box>
-      
+
+      {/* New Gift Exchange Section */}
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          backgroundColor: '#fc809c', // Add a new color in the gradient
+          textAlign: 'center',
+          color: 'white',
+        }}
+        ref={giftRef}
+      >
+        <GiftExchange />
+      </Box>
+
       <Box
         sx={{
           minHeight: '100vh',
@@ -262,14 +219,10 @@ function App() {
         </Typography>
         <PhotoAlbum />
       </Box>
+
       <div>
-      
-{/* Apple Style Music Player Button */}
-
-
-      {/* Music Player (Apple Style) */}
-      <MusicPlayer />
-    </div>
+        <MusicPlayer />
+      </div>
     </ThemeProvider>
   );
 }
